@@ -1,23 +1,21 @@
-import logo from './logo.svg';
-import './App.css';
+import {useState} from 'react'
+import NoteInput from './components/NoteInput'
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
+      <header>
+        <h1>Note Tracker</h1>
+        <p>Life is too short for lost notes - keep track of them here!</p>
       </header>
+      <main>
+        < NoteInput />
+        {/* Notes component */}
+      </main>
+      <footer>
+        <p>Created by Mandy Poon &#169; 2021</p>
+        <p><a href="https://github.com/code-by-mandy/note-tracker">Github repository</a></p>
+      </footer>
     </div>
   );
 }
