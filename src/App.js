@@ -1,7 +1,17 @@
-import {useState} from 'react'
+// import {useState} from 'react'
 import NoteInput from './components/NoteInput'
 
 function App() {
+
+  const submitNote = (e, noteName, noteStatus) => {
+    e.preventDefault();
+    addNote(noteName, noteStatus);
+  }
+
+  const addNote = (name, status) => {
+    console.log(name, status);
+  }
+
   return (
     <div className="App">
       <header>
@@ -9,7 +19,9 @@ function App() {
         <p>Life is too short for lost notes - keep track of them here!</p>
       </header>
       <main>
-        < NoteInput />
+        < NoteInput 
+          submitNote={submitNote}
+        />
         {/* Notes component */}
       </main>
       <footer>
