@@ -16,28 +16,41 @@ const NoteInput = ( {submitNote}) => {
     }
 
     return(
-        <form name="noteInput" onSubmit={handleSubmit}>
-            <div>
-                <label htmlFor="noteName" name="name">Note Name</label>
-                <textarea 
-                    id="noteName" 
-                    maxLength="20" 
-                    name="name"
-                    placeholder="Note title"
-                    onInput = {(e) => setName(e.target.value)}
-                ></textarea>
-            </div>
-            <div>
-                <label htmlFor="noteStatus">Note Status</label>
-                <select id="noteStatus" onChange = {(e) => setStatus(e.target.value)} size="3">
-                    <option value="" defaultValue disabled>Choose a note status</option>
-                    <option value="active">Active</option>
-                    <option value="tba">To-Be-Actioned</option>
-                    <option value="completed">Completed</option>
-                </select>
-            </div>
-            <button type="submit">Submit</button>
-        </form>
+        <div>
+            <h2>Save a Note</h2>
+            <form name="noteInput" onSubmit={handleSubmit}>
+                <div className="inputFieldsWrapper">
+                    <div className="inputField">
+                        <label htmlFor="noteName" name="noteName">Note Name</label>
+                        <textarea 
+                            id="noteName" 
+                            maxLength="30" 
+                            name="name"
+                            placeholder="Note title"
+                            onInput = {(e) => setName(e.target.value)}
+                            required
+                        ></textarea>
+                    </div>
+                    <div  className="inputField">
+                        <label htmlFor="noteStatus" name="noteStatus">Note Status</label>
+                        <select 
+                            id="noteStatus" 
+                            name="noteStatus"
+                            onChange = {(e) => setStatus(e.target.value)} 
+                            size="4" 
+                            required
+                        >
+                            <option value="" defaultValue disabled>Choose a note status:</option>
+                            <option value="Active">Active</option>
+                            <option value="To-Be-Actioned">To-Be-Actioned</option>
+                            <option value="Completed">Completed</option>
+                        </select>
+                    </div>
+                </div>
+                <button type="submit">Submit</button>
+            </form>
+        </div>
+        
     )
 }
 

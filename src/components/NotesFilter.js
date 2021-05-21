@@ -2,11 +2,12 @@ const NotesFilter = ({filterString}) => {
 
     return (
         <div>
-            <ul>
-                <li><button onClick={(e) => filterString(e.target.textContent.toLowerCase())}>All</button></li>
-                <li><button onClick={(e) => filterString(e.target.textContent.toLowerCase())}>Active</button></li>
-                <li><button onClick={(e) => filterString(e.target.textContent.toLowerCase())}>To-Be-Actioned</button></li>
-                <li><button onClick={(e) => filterString(e.target.textContent.toLowerCase())}>Completed</button></li>
+            <label htmlFor="filter"><h3>Filter Notes</h3></label>
+            <ul id="filter" className="filterWrapper">
+                <li><button onClick={(e) => filterString(e.target.textContent)}>All</button></li>
+                <li><button onClick={(e) => filterString(e.target.textContent)}>Active</button></li>
+                <li><button onClick={(e) => filterString(e.target.textContent)}>To-Be-Actioned</button></li>
+                <li><button onClick={(e) => filterString(e.target.textContent)}>Completed</button></li>
             </ul>
         </div>
     )

@@ -16,7 +16,7 @@ function App() {
   }  
 
   //state for storing filter string
-  const [filter, setFilter] = useState("all");
+  const [filter, setFilter] = useState("All");
 
   //get filter when chosen
   const getFilterInput = (chosenFilter) => {
@@ -32,47 +32,67 @@ function App() {
 
   //update filterArray per filter change
   useEffect(() => {
-    let filteredNotesArray = [];
     const notesArray = [...notes];
-    if (filter !== ("all")) {
+    let filteredNotesArray = [];
+
+    if (filter !== ("All")) {
         filteredNotesArray = notesArray.filter(note => note.status === filter)
-    } else (
-        filteredNotesArray = notesArray);
+    }     
+    else (
+        filteredNotesArray = notesArray
+    );
+
     setFilteredNotes(filteredNotesArray);
+
   }, [notes, filter])
 
   return (
     <div className="App">
       <header>
-        <h1>Note Tracker</h1>
-        <p>Life is too short for lost notes - keep track of them here!</p>
+        <div className="wrapper">
+          <h1>Note Tracker</h1>
+          <p>Life is too short for lost notes - keep track of them here!</p>
+        </div>
       </header>
       <main>
-        <NoteInput 
-          submitNote = {submitNote}
-        />
+        <div className="wrapper">
+          <section>
+            <NoteInput submitNote = {submitNote}/>  
+          </section>      
+                
+          <section>
+            {/* Using table here to reflect ask of tech challenge; would use flexbox or grid for responsive design */}
+              <table>
+              <caption><h2>Notes List</h2></caption>
+              <tbody className="notesList">
+                <tr>
+                  <td colSpan="2"><NotesFilter filterString = {getFilterInput}/></td>
+                </tr>
+                <tr>
+                  <th scope="col"><h3>Note Name</h3></th>
+                  <th scope="col"><h3>Note Status</h3></th>
+                </tr>
 
-        <NotesFilter filterString = {getFilterInput}/>
-
-        <div>
-            <table>
-            <caption>Notes List</caption>
-            <tbody className="notesList">
-                {
-                  filteredNotes.map(note => {
-                    return (
-                      <NoteRow key={notes.indexOf(note)} name={note.name} status={note.status}/>
-                    )
-                  }) 
-                }
-            </tbody>
-            </table>
+                  {
+                    notes.length === 0 ?
+                    <tr>
+                      <td colSpan="2" className="placeholderRow"><em>Save a note to start!</em></td>
+                    </tr> :
+                    filteredNotes.map(note => {
+                      return (
+                        <NoteRow key={notes.indexOf(note)} name={note.name} status={note.status}/>
+                      )
+                    }) 
+                  }
+              </tbody>
+              </table>
+          </section>
         </div>
-
       </main>
       <footer>
-        <p>Created by Mandy Poon &#169; 2021</p>
-        <p><a href="https://github.com/code-by-mandy/note-tracker">Github repository</a></p>
+        <div className="wrapper">
+          <p>Created by Mandy Poon &#169; 2021 | <a href="https://github.com/code-by-mandy/note-tracker">Github repository</a></p>
+        </div>
       </footer>
     </div>
   );

@@ -1,8 +1,8 @@
 const NoteRow = ({name, status}) => {
     return (
         <tr>
-            <td>{name}</td>
-            <td>{status}</td>
+            <td className="note">{name}</td>
+            <td className="note">{status}</td>
         </tr>
     );
 }
