@@ -4,11 +4,13 @@ const NotesFilter = ({filterString, notesLength}) => {
         filterString(e.target.textContent);
 
         e.target.classList.add("active");
+        e.target.setAttribute("aria-pressed", true);
 
         const filters = document.querySelectorAll('li > button');
         filters.forEach( filter => {
             if (filter !== e.target) {
                 filter.classList.remove("active");
+                filter.setAttribute("aria-pressed", false);
             }
         });            
     }
@@ -20,13 +22,13 @@ const NotesFilter = ({filterString, notesLength}) => {
                 <li>
                     {
                         notesLength === 0 ?
-                        <button onClick={handleFilter}>All</button> :
-                        <button onClick={handleFilter} className="active">All</button>
+                        <button onClick={handleFilter} aria-pressed="false">All</button> :
+                        <button onClick={handleFilter} className="active" aria-pressed="true">All</button>
                     }                    
                 </li>
-                <li><button onClick={handleFilter}>Active</button></li>
-                <li><button onClick={handleFilter}>To-Be-Actioned</button></li>
-                <li><button onClick={handleFilter}>Completed</button></li>
+                <li><button onClick={handleFilter} aria-pressed="false">Active</button></li>
+                <li><button onClick={handleFilter} aria-pressed="false">To-Be-Actioned</button></li>
+                <li><button onClick={handleFilter} aria-pressed="false">Completed</button></li>
             </ul>
         </div>
     )
