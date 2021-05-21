@@ -91,7 +91,7 @@ function App() {
       </main>
       <footer>
         <div className="wrapper">
-          <p>Created by Mandy Poon &#169; 2021 | <a href="https://github.com/code-by-mandy/note-tracker">Github repository</a></p>
+          <p>Mandy Poon &#169; 2021 | <a href="https://github.com/code-by-mandy/note-tracker">Github repository</a></p>
         </div>
       </footer>
     </div>
