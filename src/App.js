@@ -1,26 +1,45 @@
-import {useState} from 'react'
+import {useEffect, useState} from 'react'
 import NoteInput from './components/NoteInput'
 import NotesFilter from './components/NotesFilter'
-// import NotesTable from './components/NotesTable'
+import NoteRow from './components/NoteRow'
 
 function App() {
 
+  //state for storing notes array
   const [notes, setNotes] = useState([]);
+  const [filteredNotes, setFilteredNotes] = useState([]);
 
-
+  //get individual note input
   const submitNote = (e, noteName, noteStatus) => {
     e.preventDefault();
-    addNote(noteName, noteStatus);
+    getNotes(noteName, noteStatus);
+  }  
+
+  //state for storing filter string
+  const [filter, setFilter] = useState("all");
+
+  //get filter when chosen
+  const getFilterInput = (chosenFilter) => {
+    setFilter(chosenFilter);
   }
 
-  const addNote = (name, status) => {
+  //add note input to array and update notes array with any filters
+  const getNotes = (name, status) => {
     const notesArray = [...notes];
-    notesArray.push({name, status})
+    notesArray.push({name, status})    
     setNotes(notesArray);
   }
-  
-  let filteredArray = [];
-  console.log(filteredArray);
+
+  //update filterArray per filter change
+  useEffect(() => {
+    let filteredNotesArray = [];
+    const notesArray = [...notes];
+    if (filter !== ("all")) {
+        filteredNotesArray = notesArray.filter(note => note.status === filter)
+    } else (
+        filteredNotesArray = notesArray);
+    setFilteredNotes(filteredNotesArray);
+  }, [notes, filter])
 
   return (
     <div className="App">
@@ -33,21 +52,18 @@ function App() {
           submitNote = {submitNote}
         />
 
-        <NotesFilter notesArray={notes} filteredArray = {(array) => filteredArray = array}/>
+        <NotesFilter filterString = {getFilterInput}/>
 
         <div>
             <table>
             <caption>Notes List</caption>
             <tbody className="notesList">
                 {
-                notes.map(note => {
+                  filteredNotes.map(note => {
                     return (
-                    <tr>
-                        <td>{note.name}</td>
-                        <td>{note.status}</td>
-                    </tr> 
+                      <NoteRow key={notes.indexOf(note)} name={note.name} status={note.status}/>
                     )
-                })
+                  }) 
                 }
             </tbody>
             </table>
