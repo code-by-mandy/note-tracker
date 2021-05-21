@@ -13,6 +13,7 @@ const NoteInput = ( {submitNote}) => {
                     id="noteName" 
                     maxLength="20" 
                     name="name"
+                    placeholder="Note title"
                     onChange = {(e) => setName(e.target.value)}
                 ></textarea>
             </div>
