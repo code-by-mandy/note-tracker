@@ -66,7 +66,7 @@ function App() {
               <caption><h2>Notes List</h2></caption>
               <tbody className="notesList">
                 <tr>
-                  <td colSpan="2"><NotesFilter filterString = {getFilterInput}/></td>
+                  <td colSpan="2"><NotesFilter filterString = {getFilterInput} notesLength = {notes.length}/></td>
                 </tr>
                 <tr>
                   <th scope="col"><h3>Note Name</h3></th>

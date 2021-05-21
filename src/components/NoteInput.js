@@ -21,12 +21,12 @@ const NoteInput = ( {submitNote}) => {
             <form name="noteInput" onSubmit={handleSubmit}>
                 <div className="inputFieldsWrapper">
                     <div className="inputField">
-                        <label htmlFor="noteName" name="noteName">Note Name</label>
+                        <label htmlFor="noteName" name="noteName">Note Title</label>
                         <textarea 
                             id="noteName" 
                             maxLength="30" 
                             name="name"
-                            placeholder="Note title"
+                            placeholder="E.g. Groceries at 5pm"
                             onInput = {(e) => setName(e.target.value)}
                             required
                         ></textarea>
@@ -38,7 +38,6 @@ const NoteInput = ( {submitNote}) => {
                             name="noteStatus"
                             onChange = {(e) => setStatus(e.target.value)} 
                             size="4" 
-                            required
                         >
                             <option value="" defaultValue disabled>Choose a note status:</option>
                             <option value="Active">Active</option>
