@@ -17,7 +17,6 @@ function App() {
 
   //state for storing filter string
   const [filters, setFilters] = useState([]);
-  console.log(filters);
 
   //add note input to array and update notes array with any filters
   const getNotes = (name, status) => {
@@ -26,21 +25,26 @@ function App() {
     setNotes(notesArray);
   }
 
-  //update filterArray per filter change >> change to array!
-  // useEffect(() => {
-  //   const notesArray = [...notes];
-  //   let filteredNotesArray = [];
+  // update filterArray per filter change >> change to array!
+  useEffect(() => {
+    const notesArray = [...notes];
+    let newFilteredNotes = [];
+    
+    if (filters.includes("all")) {
+      newFilteredNotes = notesArray;
+    } else {      
+      notesArray.forEach(note => {
+        filters.forEach(filterOption => {
+          if (note.status === filterOption) {
+            newFilteredNotes.push(note);
+          }
+        })
+      })
+    }
+    setFilteredNotes(newFilteredNotes);
+  }, [notes, filters])
 
-  //   if (filter !== ("All")) {
-  //       filteredNotesArray = notesArray.filter(note => note.status === filter)
-  //   }     
-  //   else (
-  //       filteredNotesArray = notesArray
-  //   );
-
-  //   setFilteredNotes(filteredNotesArray);
-
-  // }, [notes, filter])
+    // setFilteredNotes(filteredNotesArray);
 
   return (
     <div className="App">

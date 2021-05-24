@@ -40,9 +40,9 @@ const NoteInput = ( {submitNote}) => {
                             size="4" 
                         >
                             <option value="" defaultValue disabled>Choose a note status:</option>
-                            <option value="Active">Active</option>
-                            <option value="To-Be-Actioned">To-Be-Actioned</option>
-                            <option value="Completed">Completed</option>
+                            <option value="active">Active</option>
+                            <option value="tba">To-Be-Actioned</option>
+                            <option value="completed">Completed</option>
                         </select>
                     </div>
                 </div>

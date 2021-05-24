@@ -1,19 +1,25 @@
 import {useEffect, useState} from 'react'
 
-const NotesFilter = ({filterArray, notesLength}) => {
+const NotesFilter = ({filterArray}) => {
 
     const [checkedBoxes, setCheckedBoxes] = useState([]);
 
     useEffect(() => {
         const checkBoxesNode = document.querySelectorAll('input[type=checkbox]');
         const checkBoxesArray = Array.from(checkBoxesNode);
-        setCheckedBoxes(checkBoxesArray);
+        setCheckedBoxes(checkBoxesArray);        
     }, []);  
+
+    //function to manually check all on page load and when all is checked by user
+    //when something other than all is checked, the rest are unchecked
         
     const handleFilter = () => {
         const oldBoxes = [...checkedBoxes];
         const updatedBoxes = oldBoxes.filter(box => box.checked);
-        filterArray(updatedBoxes);     
+        const updatedBoxValues = updatedBoxes.map((box) => {
+            return (box.id)
+        });
+        filterArray(updatedBoxValues);     
     };
 
     return (
@@ -21,7 +27,7 @@ const NotesFilter = ({filterArray, notesLength}) => {
             <fieldset>
                 <legend htmlFor="filter"><h3>Filter Notes</h3></legend>
                 <div>
-                    <input type="checkbox" name="filter" id="all" value="all" onClick= {handleFilter}></input>
+                    <input type="checkbox" name="filter" id="all" value="all" onClick= {handleFilter} defaultChecked></input>
                     <label htmlFor="all">All</label>
                 </div>
                 <div>
