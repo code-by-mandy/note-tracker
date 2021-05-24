@@ -30,7 +30,7 @@ function App() {
     const notesArray = [...notes];
     let newFilteredNotes = [];
     
-    if (filters.includes("all")) {
+    if (filters.includes("all") || filters.length === 0) {
       newFilteredNotes = notesArray;
     } else {      
       notesArray.forEach(note => {

@@ -1,6 +1,6 @@
 import {useState} from 'react'
 
-const NoteInput = ( {submitNote}) => {
+const NoteInput = ( {submitNote} ) => {
 
     const [name, setName] = useState("");
     const [status, setStatus] = useState("");
