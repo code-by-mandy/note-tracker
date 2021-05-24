@@ -1,43 +1,35 @@
-import {useEffect, useState} from 'react'
+const NotesFilter = ({filterString, notesLength}) => {
 
-const NotesFilter = ({filterArray, notesLength}) => {
+    const handleFilter = (e) => {
+        filterString(e.target.textContent);
+        e.target.classList.add("active");
+        e.target.setAttribute("aria-pressed", true);
 
-    const [checkedBoxes, setCheckedBoxes] = useState([]);
-
-    useEffect(() => {
-        const checkBoxesNode = document.querySelectorAll('input[type=checkbox]');
-        const checkBoxesArray = Array.from(checkBoxesNode);
-        setCheckedBoxes(checkBoxesArray);
-    }, []);  
-        
-    const handleFilter = () => {
-        const oldBoxes = [...checkedBoxes];
-        const updatedBoxes = oldBoxes.filter(box => box.checked);
-        filterArray(updatedBoxes);     
-    };
+        const filters = document.querySelectorAll('li > button');
+        filters.forEach( filter => {
+            if (filter !== e.target) {
+                filter.classList.remove("active");
+                filter.setAttribute("aria-pressed", false);
+            }
+        });            
+    }
 
     return (
-        <form className="filterSection">
-            <fieldset>
-                <legend htmlFor="filter"><h3>Filter Notes</h3></legend>
-                <div>
-                    <input type="checkbox" name="filter" id="all" value="all" onClick= {handleFilter}></input>
-                    <label htmlFor="all">All</label>
-                </div>
-                <div>
-                    <input type="checkbox" name="filter" id="active" value="active" onClick= {handleFilter}></input>
-                    <label htmlFor="active">Active</label>
-                </div>
-                <div>
-                    <input type="checkbox" name="filter" id="tba" value="tba" onClick= {handleFilter}></input>
-                    <label htmlFor="tba">To-Be-Actioned</label>
-                </div>
-                <div>
-                    <input type="checkbox" name="filter" id="completed" value="completed" onClick= {handleFilter}></input>
-                    <label htmlFor="completed">Completed</label>
-                </div>
-            </fieldset>
-        </form>
+        <div>
+            <label htmlFor="filter"><h3>Filter Notes</h3></label>
+            <ul id="filter" className="filterWrapper">
+                <li>
+                    {
+                        notesLength === 0 ?
+                        <button onClick={handleFilter} aria-pressed="false">All</button> :
+                        <button onClick={handleFilter} className="active" aria-pressed="true">All</button>
+                    }                    
+                </li>
+                <li><button onClick={handleFilter} aria-pressed="false">Active</button></li>
+                <li><button onClick={handleFilter} aria-pressed="false">To-Be-Actioned</button></li>
+                <li><button onClick={handleFilter} aria-pressed="false">Completed</button></li>
+            </ul>
+        </div>
     )
 }
 

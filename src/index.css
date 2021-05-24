@@ -35,7 +35,7 @@ header, footer, main {
   padding: 30px 0;
 }
 
-form[name=noteInput], .inputFieldsWrapper, .inputField, .filterOptions {
+form[name=noteInput], .inputFieldsWrapper, .inputField, .filterWrapper {
   display: flex;
 }
 
@@ -157,7 +157,7 @@ th {
 
 /*filter*/
 
-.filterOptions {
+.filterWrapper {
   justify-content: flex-start
 }
 
