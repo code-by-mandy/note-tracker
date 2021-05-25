@@ -43,8 +43,11 @@ function App() {
       setFilteredNotes(filteredNotesArray);
     }, [notes, filter])
 
+    //keyboard focus state (for filter focus css)
+    const [keyUse, setKeyUse] = useState(false);
+
   return (
-    <div className="App">
+    <div className="App"  onKeyDown = {() => setKeyUse(true)} onClick = {() => setKeyUse(false)}>
       <header>
         <div className="wrapper">
           <h1>Note Tracker</h1>
@@ -60,7 +63,7 @@ function App() {
           <section>
             <h2>Note List</h2>
               <div className="notesWrapper">
-                <NotesFilter filterString = {getFilterInput}/>
+                <NotesFilter filterString = {getFilterInput} keyUse = {keyUse}/>
                 <div className="notesList">
                   <h3>Your Notes</h3>
                   {

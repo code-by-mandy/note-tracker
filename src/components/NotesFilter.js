@@ -1,4 +1,4 @@
-const NotesFilter = ({filterString}) => {
+const NotesFilter = ({filterString, keyUse}) => {
 
     const handleFilter = (e) => {
         filterString(e.target.value);
@@ -6,7 +6,9 @@ const NotesFilter = ({filterString}) => {
 
     const fieldset = document.querySelector('fieldset');
     const keyFocus = () => {
-        fieldset.classList.add("focused");
+        if (keyUse) {
+            fieldset.classList.add("focused");
+        }      
     }
 
     const keyLeave = () => {
