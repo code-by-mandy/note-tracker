@@ -44,6 +44,8 @@ function App() {
     setFilteredNotes(newFilteredNotes);
   }, [notes, filters])
 
+  console.log(filters);
+
     // setFilteredNotes(filteredNotesArray);
 
   return (
