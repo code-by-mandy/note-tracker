@@ -16,7 +16,12 @@ function App() {
   }  
 
   //state for storing filter string
-  const [filters, setFilters] = useState([]);
+  const [filter, setFilter] = useState("All");
+
+  //get filter when chosen
+  const getFilterInput = (chosenFilter) => {
+    setFilter(chosenFilter);
+  }
 
   //add note input to array and update notes array with any filters
   const getNotes = (name, status) => {
@@ -25,28 +30,18 @@ function App() {
     setNotes(notesArray);
   }
 
-  // update filterArray per filter change >> change to array!
-  useEffect(() => {
-    const notesArray = [...notes];
-    let newFilteredNotes = [];
-    
-    if (filters.includes("all") || filters.length === 0) {
-      newFilteredNotes = notesArray;
-    } else {      
-      notesArray.forEach(note => {
-        filters.forEach(filterOption => {
-          if (note.status === filterOption) {
-            newFilteredNotes.push(note);
-          }
-        })
-      })
-    }
-    setFilteredNotes(newFilteredNotes);
-  }, [notes, filters])
+    //update filterArray per filter change
+    useEffect(() => {
+      const notesArray = [...notes];
+      let filteredNotesArray = [];
 
-  console.log(filters);
-
-    // setFilteredNotes(filteredNotesArray);
+      if (filter !== ("All")) {
+        filteredNotesArray = notesArray.filter(note => note.status === filter)
+      } else (
+          filteredNotesArray = notesArray
+      );
+      setFilteredNotes(filteredNotesArray);
+    }, [notes, filter])
 
   return (
     <div className="App">
@@ -64,25 +59,30 @@ function App() {
                 
           <section>
 
-            <h2>Notes List</h2>
-            <NotesFilter filterArray = {(array) => setFilters(array)} notesLength = {notes.length}/>
-            <div className="notesList">
-              <div className="headerRow">
-                <div><h3>Note Name</h3></div>
-                <div><h3>Note Status</h3></div>
-              </div>
-              {
-                    notes.length === 0 ?
-                    <div className="noteRow">
-                      <div className="placeholderRow"><em>Save a note to start!</em></div>
-                    </div> :
+            {/* Using table here to reflect ask of tech challenge; would use flexbox or grid for responsive design */}
+              <table>
+                <caption><h2>Notes List</h2></caption>
+                <tbody className="notesList">
+                  <tr>
+                    <td colSpan="2"><NotesFilter filterString = {getFilterInput} notesLength = {notes.length}/></td>
+                  </tr>
+                  <tr>
+                    <th scope="col"><h3>Note Name</h3></th>
+                    <th scope="col"><h3>Note Status</h3></th>
+                  </tr>
+
+                  { notes.length === 0 ?
+                    <tr>
+                      <td colSpan="2" className="placeholderRow"><em>Save a note to start!</em></td>
+                    </tr> :
                     filteredNotes.map(note => {
                       return (
                         <NoteRow key={notes.indexOf(note)} name={note.name} status={note.status}/>
                       )
                     }) 
                   }
-            </div>
+                </tbody>
+              </table>                    
           </section>
         </div>
       </main>

@@ -1,9 +1,9 @@
 const NoteRow = ({name, status}) => {
     return (
-        <div>
-            <div className="note">{name}</div>
-            <div className="note">{status}</div>
-        </div>
+        <tr>
+            <td className="note">{name}</td>
+            <td className="note">{status}</td>
+        </tr>
     );
 }
 
