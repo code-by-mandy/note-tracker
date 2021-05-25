@@ -11,7 +11,6 @@ const NoteInput = ( {submitNote} ) => {
         setStatus("");
         
         const clearInputs = document.querySelectorAll('textarea, select');
-
         clearInputs.forEach(input => input.value="");
     }
 
@@ -47,7 +46,7 @@ const NoteInput = ( {submitNote} ) => {
                     </div>
                 </div>
                 <div>
-                    <button type="submit">Submit</button>
+                    <button type="submit">Save</button>
                 </div>                
             </form>
         </div>

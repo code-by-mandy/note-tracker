@@ -58,7 +58,7 @@ function App() {
           </section>      
                 
           <section>
-            <h2>Notes List</h2>
+            <h2>Note List</h2>
               <div className="notesWrapper">
                 <NotesFilter filterString = {getFilterInput}/>
                 <div className="notesList">
