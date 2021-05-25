@@ -16,7 +16,7 @@ function App() {
   }  
 
   //state for storing filter string
-  const [filter, setFilter] = useState("All");
+  const [filter, setFilter] = useState("all");
 
   //get filter when chosen
   const getFilterInput = (chosenFilter) => {
@@ -35,7 +35,7 @@ function App() {
       const notesArray = [...notes];
       let filteredNotesArray = [];
 
-      if (filter !== ("All")) {
+      if (filter !== ("all")) {
         filteredNotesArray = notesArray.filter(note => note.status === filter)
       } else (
           filteredNotesArray = notesArray
@@ -58,31 +58,28 @@ function App() {
           </section>      
                 
           <section>
-
-            {/* Using table here to reflect ask of tech challenge; would use flexbox or grid for responsive design */}
-              <table>
-                <caption><h2>Notes List</h2></caption>
-                <tbody className="notesList">
-                  <tr>
-                    <td colSpan="2"><NotesFilter filterString = {getFilterInput} notesLength = {notes.length}/></td>
-                  </tr>
-                  <tr>
-                    <th scope="col"><h3>Note Name</h3></th>
-                    <th scope="col"><h3>Note Status</h3></th>
-                  </tr>
-
-                  { notes.length === 0 ?
-                    <tr>
-                      <td colSpan="2" className="placeholderRow"><em>Save a note to start!</em></td>
-                    </tr> :
-                    filteredNotes.map(note => {
-                      return (
-                        <NoteRow key={notes.indexOf(note)} name={note.name} status={note.status}/>
-                      )
-                    }) 
-                  }
-                </tbody>
-              </table>                    
+            <h2>Notes List</h2>
+              <div className="notesWrapper">
+                <NotesFilter filterString = {getFilterInput}/>
+                <div className="notesList">
+                  <h3>Your Notes</h3>
+                  {
+                        notes.length === 0 ?
+                        <div className="noteRow">
+                          <p className="placeholderRow"><em>Save a note to start!</em></p>
+                        </div> :
+                        <ul>
+                          {
+                            filteredNotes.map(note => {
+                              return (
+                                <NoteRow key={notes.indexOf(note)} name={note.name} status={note.status}/>
+                              )
+                            }) 
+                          }                          
+                        </ul>                        
+                      }
+                </div>     
+              </div>                             
           </section>
         </div>
       </main>

@@ -46,7 +46,9 @@ const NoteInput = ( {submitNote} ) => {
                         </select>
                     </div>
                 </div>
-                <button type="submit">Submit</button>
+                <div>
+                    <button type="submit">Submit</button>
+                </div>                
             </form>
         </div>
         

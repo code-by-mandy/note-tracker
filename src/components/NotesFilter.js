@@ -1,44 +1,67 @@
-const NotesFilter = ({filterString, notesLength}) => {
+const NotesFilter = ({filterString}) => {
 
     const handleFilter = (e) => {
-        filterString(e.target.textContent);
-        e.target.classList.add("active");
-        e.target.setAttribute("aria-pressed", true);
-
-        const filters = document.querySelectorAll('li > button');
-        filters.forEach( filter => {
-            if (filter !== e.target) {
-                filter.classList.remove("active");
-                filter.setAttribute("aria-pressed", false);
-            }
-        });            
+        filterString(e.target.value);
     }
 
-    // const checkAll = (e) => {
-    //     if (updatedFilter.includes("all")) {
-    //         checkBoxesNode.forEach(checkbox => checkbox.checked = true)
-    //     } else if (e.target.value === "all" && e.target.checked === false) {
-    //         checkBoxesNode.forEach(checkbox => checkbox.checked = false)
-    //     }
-    //     console.log(updatedFilter);
-    // }
+    const fieldset = document.querySelector('fieldset');
+    const keyFocus = () => {
+        fieldset.classList.add("focused");
+    }
+
+    const keyLeave = () => {
+        fieldset.classList.remove("focused");
+    }
 
     return (
-        <div>
-            <label htmlFor="filter"><h3>Filter Notes</h3></label>
-            <ul id="filter" className="filterWrapper">
-                <li>
-                    {
-                        notesLength === 0 ?
-                        <button onClick={handleFilter} aria-pressed="false">All</button> :
-                        <button onClick={handleFilter} className="active" aria-pressed="true">All</button>
-                    }                    
-                </li>
-                <li><button onClick={handleFilter} aria-pressed="false">Active</button></li>
-                <li><button onClick={handleFilter} aria-pressed="false">To-Be-Actioned</button></li>
-                <li><button onClick={handleFilter} aria-pressed="false">Completed</button></li>
-            </ul>
-        </div>
+        <form onFocus={keyFocus} onBlur={keyLeave} name="filter">
+            <fieldset name="filter">
+                <legend><h3>Filter Notes</h3></legend>
+                <div className="filterWrapper">
+                    <div className="filterOption">
+                        <input 
+                            type="radio" 
+                            name="filter" 
+                            id="all" 
+                            value="all" 
+                            defaultChecked="true"
+                            onClick={handleFilter}
+                        ></input>
+                        <label htmlFor="all" name="filter">All</label>
+                    </div>
+                    <div className="filterOption">
+                        <input 
+                            type="radio" 
+                            name="filter" 
+                            id="active" 
+                            value="active"
+                            onClick={handleFilter}
+                        ></input>
+                        <label htmlFor="active" name="filter">Active</label>
+                    </div>
+                    <div className="filterOption">
+                        <input 
+                            type="radio" 
+                            name="filter" 
+                            id="tba" 
+                            value="tba"
+                            onClick={handleFilter}
+                        ></input>
+                        <label htmlFor="tba" name="filter">To-Be-Actioned</label>
+                    </div>
+                    <div className="filterOption">
+                        <input 
+                            type="radio" 
+                            name="filter" 
+                            id="completed" 
+                            value="completed"
+                            onClick={handleFilter}
+                        ></input>
+                        <label htmlFor="completed" name="filter">Completed</label>
+                    </div>
+                </div>
+            </fieldset>            
+        </form>
     )
 }
 
