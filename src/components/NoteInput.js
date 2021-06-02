@@ -1,17 +1,19 @@
-import {useState} from 'react'
+import {useState, useRef} from 'react'
 
 const NoteInput = ( {submitNote} ) => {
 
     const [name, setName] = useState("");
     const [status, setStatus] = useState("");
+    const noteStatus = useRef(null);
+    const noteName = useRef(null);
 
     const handleSubmit = (e) => {
         submitNote(e, name, status);
         setName("");
         setStatus("");
         
-        const clearInputs = document.querySelectorAll('textarea, select');
-        clearInputs.forEach(input => input.value="");
+        noteStatus.current.value = "";
+        noteName.current.value = "";
     }
 
     return(
@@ -28,6 +30,7 @@ const NoteInput = ( {submitNote} ) => {
                             placeholder="E.g. Groceries at 5pm"
                             onInput = {(e) => setName(e.target.value)}
                             required
+                            ref={noteName}
                         ></textarea>
                     </div>
                     <div  className="inputField">
@@ -37,6 +40,7 @@ const NoteInput = ( {submitNote} ) => {
                             name="noteStatus"
                             onChange = {(e) => setStatus(e.target.value)} 
                             size="4" 
+                            ref={noteStatus}
                         >
                             <option value="" defaultValue disabled>Choose a note status:</option>
                             <option value="active">Active</option>

@@ -1,23 +1,26 @@
+import {useRef} from 'react'
+
 const NotesFilter = ({filterString, keyUse}) => {
 
     const handleFilter = (e) => {
         filterString(e.target.value);
     }
 
-    const fieldset = document.querySelector('fieldset');
+    const fieldSet = useRef(null);
+
     const keyFocus = () => {
         if (keyUse) {
-            fieldset.classList.add("focused");
+            fieldSet.current.classList.add("focused");
         }      
     }
 
     const keyLeave = () => {
-        fieldset.classList.remove("focused");
+        fieldSet.current.classList.remove("focused");
     }
 
     return (
         <form onFocus={keyFocus} onBlur={keyLeave} name="filter">
-            <fieldset name="filter">
+            <fieldset name="filter" ref={fieldSet}>
                 <legend><h3>Filter Notes</h3></legend>
                 <div className="filterWrapper">
                     <div className="filterOption">
